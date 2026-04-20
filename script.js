@@ -1,6 +1,4 @@
 const mixYourOwn = {
-  title: "Create your setup",
-  subtitle: "Pick exactly what you need to get your business off the ground. We focus heavily on monthly plans, but we also have one-time services.",
   categories: [
     {
       name: "Artist and fursuits.",
@@ -58,118 +56,122 @@ const mixYourOwn = {
   ]
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const categoriesContainer = document.getElementById('categories-container');
-  if (!categoriesContainer) return;
+const selectedOptions = {};
+let adBudget = 0;
+const expandedCategories = {};
 
-  let selectedOptions = {};
-  let adBudget = 0;
+function updateTotals() {
+  let monthlyMin = 0, monthlyMax = 0, oneTimeMin = 0, oneTimeMax = 0;
+  mixYourOwn.categories.forEach(cat => {
+    cat.options.forEach(opt => {
+      if (selectedOptions[opt.id]) {
+        if (opt.isMonthly) { monthlyMin += opt.priceMin; monthlyMax += opt.priceMax; }
+        else               { oneTimeMin += opt.priceMin; oneTimeMax += opt.priceMax; }
+      }
+    });
+  });
+  const totalAdSpend = adBudget + adBudget * 0.2;
+  monthlyMin += totalAdSpend; monthlyMax += totalAdSpend;
 
-  function renderCategories() {
-    categoriesContainer.innerHTML = '';
-    
-    mixYourOwn.categories.forEach((category, idx) => {
-      const categoryDiv = document.createElement('div');
-      categoryDiv.className = 'bg-white sketch-border overflow-hidden';
-      
-      const headerBtn = document.createElement('button');
-      headerBtn.className = 'w-full p-6 flex justify-between items-center bg-paper hover:bg-primary/5 transition-colors text-left';
-      headerBtn.innerHTML = `
-        <h3 class="text-2xl font-black font-headline">${category.name}</h3>
-        <span class="material-symbols-outlined transition-transform duration-300" id="icon-${idx}">expand_more</span>
+  document.getElementById('monthly-total').innerHTML =
+    `$${monthlyMin.toLocaleString()} <span class="text-2xl text-on-surface/50">-</span> $${monthlyMax.toLocaleString()}`;
+  document.getElementById('onetime-total').innerHTML =
+    `$${oneTimeMin.toLocaleString()} <span class="text-xl text-on-surface/50">-</span> $${oneTimeMax.toLocaleString()}`;
+}
+
+function renderCategories() {
+  const container = document.getElementById('categories-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  mixYourOwn.categories.forEach((category, idx) => {
+    const isOpen = !!expandedCategories[idx];
+
+    // Wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'bg-white sketch-border overflow-hidden';
+
+    // Header button
+    const btn = document.createElement('button');
+    btn.className = 'w-full p-6 flex justify-between items-center bg-paper hover:bg-primary/5 transition-colors text-left';
+    btn.innerHTML = `
+      <h3 class="text-2xl font-black font-headline">${category.name}</h3>
+      <i data-lucide="chevron-down" class="transition-transform duration-300" style="width:24px;height:24px;${isOpen ? 'transform:rotate(180deg)' : ''}"></i>
+    `;
+    btn.addEventListener('click', () => {
+      expandedCategories[idx] = !expandedCategories[idx];
+      renderCategories();
+    });
+
+    // Content panel
+    const content = document.createElement('div');
+    content.style.cssText = isOpen
+      ? 'overflow:hidden;'
+      : 'overflow:hidden;height:0;';
+    content.className = 'border-t-2 border-on-surface/10';
+
+    const inner = document.createElement('div');
+    inner.className = 'p-6 bg-white space-y-4';
+
+    category.options.forEach(opt => {
+      const isChecked = !!selectedOptions[opt.id];
+
+      const label = document.createElement('label');
+      label.className = `flex items-start gap-4 p-4 cursor-pointer sketch-border transition-colors ${isChecked ? 'bg-primary/10' : 'bg-background hover:bg-on-surface/5'}`;
+      if (isChecked) label.style.borderColor = '#00d084';
+
+      // Badge colour
+      const badgeBg = opt.isMonthly ? 'background:#bfefff;color:#0369a1;' : 'background:#ccfaf4;color:#0d9488;';
+      const badgeIcon = opt.isMonthly ? 'calendar' : 'zap';
+      const badgeText = opt.isMonthly ? 'Monthly' : 'One-time';
+
+      label.innerHTML = `
+        <div class="mt-1 w-6 h-6 shrink-0 rounded border-2 flex items-center justify-center"
+             style="${isChecked ? 'background:#00d084;border-color:#00d084;color:white;' : 'border-color:#0f172a;background:white;'}">
+          ${isChecked ? '<i data-lucide="check" style="width:14px;height:14px;stroke-width:4;"></i>' : ''}
+        </div>
+        <div class="flex-grow flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+          <span class="font-bold leading-tight">${opt.label}</span>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1" style="${badgeBg}">
+              <i data-lucide="${badgeIcon}" style="width:12px;height:12px;"></i>
+              ${badgeText}
+            </span>
+            <span class="font-sketch text-on-surface/80 text-lg whitespace-nowrap">
+              $${opt.priceMin} - $${opt.priceMax}
+            </span>
+          </div>
+        </div>
       `;
 
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'p-6 border-t-2 border-on-surface/10 bg-white space-y-4 hidden';
-      contentDiv.id = `content-${idx}`;
-
-      category.options.forEach(opt => {
-        const isSelected = !!selectedOptions[opt.id];
-        
-        const label = document.createElement('label');
-        label.className = `flex items-start gap-4 p-4 cursor-pointer sketch-border transition-colors ${isSelected ? 'bg-primary/10 border-primary' : 'bg-background hover:bg-on-surface/5'}`;
-        
-        label.innerHTML = `
-          <div class="mt-1 w-6 h-6 shrink-0 rounded border-2 flex items-center justify-center ${isSelected ? 'bg-primary border-primary text-white' : 'border-on-surface bg-[--color-surface]'}">
-            <input type="checkbox" class="hidden" value="${opt.id}" ${isSelected ? 'checked' : ''}>
-            ${isSelected ? '<span class="material-symbols-outlined shrink-0" style="font-size: 16px; font-weight: bold;">check</span>' : ''}
-          </div>
-          <div class="flex-grow flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-            <span class="font-bold leading-tight">${opt.label}</span>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 ${opt.isMonthly ? 'bg-secondary/20 text-secondary' : 'bg-tertiary/20 text-tertiary'}">
-                <span class="material-symbols-outlined shrink-0" style="font-size: 12px;">${opt.isMonthly ? 'calendar_month' : 'bolt'}</span>
-                ${opt.isMonthly ? 'Monthly' : 'One-time'}
-              </span>
-              <span class="font-sketch text-on-surface/80 text-lg whitespace-nowrap">
-                $${opt.priceMin} - $${opt.priceMax}
-              </span>
-            </div>
-          </div>
-        `;
-
-        label.querySelector('input').addEventListener('change', (e) => {
-          selectedOptions[opt.id] = e.target.checked;
-          renderCategories();
-          updateTotals();
-        });
-
-        contentDiv.appendChild(label);
+      label.addEventListener('click', () => {
+        selectedOptions[opt.id] = !selectedOptions[opt.id];
+        renderCategories();
+        updateTotals();
       });
 
-      headerBtn.addEventListener('click', () => {
-        const isHidden = contentDiv.classList.contains('hidden');
-        if (isHidden) {
-          contentDiv.classList.remove('hidden');
-          headerBtn.querySelector('span').style.transform = 'rotate(180deg)';
-        } else {
-          contentDiv.classList.add('hidden');
-          headerBtn.querySelector('span').style.transform = 'rotate(0deg)';
-        }
-      });
-
-      categoryDiv.appendChild(headerBtn);
-      categoryDiv.appendChild(contentDiv);
-      categoriesContainer.appendChild(categoryDiv);
-    });
-  }
-
-  function updateTotals() {
-    let monthlyMin = 0;
-    let monthlyMax = 0;
-    let oneTimeMin = 0;
-    let oneTimeMax = 0;
-
-    mixYourOwn.categories.forEach(cat => {
-      cat.options.forEach(opt => {
-        if (selectedOptions[opt.id]) {
-          if (opt.isMonthly) {
-            monthlyMin += opt.priceMin;
-            monthlyMax += opt.priceMax;
-          } else {
-            oneTimeMin += opt.priceMin;
-            oneTimeMax += opt.priceMax;
-          }
-        }
-      });
+      inner.appendChild(label);
     });
 
-    const totalAdSpend = adBudget + (adBudget * 0.20);
-    monthlyMin += totalAdSpend;
-    monthlyMax += totalAdSpend;
+    content.appendChild(inner);
+    wrapper.appendChild(btn);
+    wrapper.appendChild(content);
+    container.appendChild(wrapper);
+  });
 
-    document.getElementById('monthly-total').innerHTML = `$${monthlyMin.toLocaleString()} <span class="text-2xl text-on-surface/50">-</span> $${monthlyMax.toLocaleString()}`;
-    document.getElementById('onetime-total').innerHTML = `$${oneTimeMin.toLocaleString()} <span class="text-xl text-on-surface/50">-</span> $${oneTimeMax.toLocaleString()}`;
-  }
+  // Re-init lucide icons for dynamically inserted elements
+  if (window.lucide) lucide.createIcons();
+}
 
-  const adBudgetInput = document.getElementById('ad-budget-input');
-  if (adBudgetInput) {
-    adBudgetInput.addEventListener('input', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
+  renderCategories();
+  updateTotals();
+
+  const budgetInput = document.getElementById('ad-budget-input');
+  if (budgetInput) {
+    budgetInput.addEventListener('input', e => {
       adBudget = parseFloat(e.target.value) || 0;
       updateTotals();
     });
   }
-
-  renderCategories();
-  updateTotals();
 });
