@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logo1.png" />
-  <title>Contact | Axolotl Media</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap" rel="stylesheet" />
+  <title>Contact | Axolot Media</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap"
+    rel="stylesheet" />
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style type="text/tailwindcss">
@@ -66,26 +69,30 @@
     .floating { animation: floating 3s ease-in-out infinite; }
   </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
   <!-- Magical Background Elements -->
-  <div class="magic-decoration w-[500px] h-[500px] bg-white" style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
+  <div class="magic-decoration w-[500px] h-[500px] bg-white"
+    style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
   <div class="magic-decoration w-[600px] h-[600px] bg-yellow-200" style="bottom:-10%;right:-10%;"></div>
   <div class="magic-decoration w-[400px] h-[400px] bg-blue-300 opacity-30" style="top:40%;right:-5%;"></div>
   <div class="magic-decoration w-[300px] h-[300px] bg-green-200 opacity-20" style="bottom:30%;left:-5%;"></div>
 
   <!-- Navigation -->
-  <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
+  <nav
+    class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
     <a href="index.html" class="flex items-center gap-3">
-      <img alt="Axolotl Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
-      <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolotl Media</span>
+      <img alt="Axolot Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
+      <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolot Media</span>
     </a>
     <div class="hidden md:flex gap-8 items-center font-semibold text-sm">
       <a href="index.html#how" class="hover:text-primary transition-colors">How we help</a>
       <a href="index.html#mix-your-own" class="hover:text-primary transition-colors">Build Your Setup</a>
       <a href="contact.html" class="hover:text-primary transition-colors">Say Hi!</a>
     </div>
-    <a href="index.html#mix-your-own" class="sketch-button bg-primary px-5 py-2 rounded-lg font-bold text-sm inline-block">
+    <a href="index.html#mix-your-own"
+      class="sketch-button bg-primary px-5 py-2 rounded-lg font-bold text-sm inline-block">
       Let's Grow
     </a>
   </nav>
@@ -98,7 +105,7 @@
             Let's <span class="text-primary">Chat</span>
           </h1>
           <p class="font-sketch text-2xl text-on-surface/80 max-w-2xl mx-auto">
-            We're real furs who want to see you succeed. Let's talk about your goals and how we can get your passion paying the bills.
+            We want you to succeed; for us to win, you have to win, so let's talk about you!
           </p>
         </div>
 
@@ -106,23 +113,45 @@
           <!-- Contact Form -->
           <div class="bg-white p-8 sketch-border" style="transform:rotate(1deg);">
             <h2 class="font-headline text-3xl font-black mb-6">Send a Message</h2>
-            <form class="space-y-6" onsubmit="event.preventDefault();">
+            <form class="space-y-6" id="contact-form">
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">Name / Sona</label>
-                <input type="text" class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary" placeholder="How should we call you?" />
+                <input type="text" id="form-name"
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="How should we call you?" />
               </div>
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">Email</label>
-                <input type="email" class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Where can we reach you?" />
+                <input type="email" id="form-email"
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Where can we reach you?" />
               </div>
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">What's on your mind?</label>
-                <textarea class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary h-32 resize-none" placeholder="Tell us about your project, your goals, or just say hi!"></textarea>
+                <textarea id="form-message"
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary h-32 resize-none"
+                  placeholder="Tell us about your project, your goals, or just say hi!"></textarea>
               </div>
-              <button type="submit" class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg]">
+              <button type="submit"
+                class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg]">
                 <i data-lucide="send" style="width:20px;height:20px;"></i> Send Message
               </button>
             </form>
+            <script>
+              document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name    = document.getElementById('form-name').value;
+                const email   = document.getElementById('form-email').value;
+                const message = document.getElementById('form-message').value;
+                const subject = encodeURIComponent('Message from ' + (name || 'the website'));
+                const body    = encodeURIComponent(
+                  'Name / Sona: ' + name + '\n' +
+                  'Email: ' + email + '\n\n' +
+                  message
+                );
+                window.location.href = 'mailto:hi@axolotmedia.com?subject=' + subject + '&body=' + body;
+              });
+            </script>
           </div>
 
           <!-- Other ways to connect -->
@@ -134,8 +163,8 @@
               <p class="mb-6 font-medium text-on-surface/80">
                 The fastest way to reach us. Send a direct message to our account and we'll get back to you ASAP!
               </p>
-              <a href="#" class="sketch-button inline-block text-white px-6 py-3 font-bold" style="background:#5865F2;">
-                Message Us
+              <a href="https://discord.com/users/1495845952852852948" target="_blank" rel="noopener noreferrer" class="sketch-button inline-block text-white px-6 py-3 font-bold" style="background:#5865F2;">
+                Message Us on Discord
               </a>
             </div>
 
@@ -146,8 +175,9 @@
               <p class="mb-6 font-medium text-on-surface/80">
                 Prefer the classic way? Shoot us an email directly and we'll get back to you within 24 hours.
               </p>
-              <a href="mailto:hello@axolotlmedia.com" class="sketch-button bg-primary text-on-surface px-6 py-3 inline-block font-bold">
-                hello@axolotlmedia.com
+              <a href="mailto:hi@axolotmedia.com"
+                class="sketch-button bg-primary text-on-surface px-6 py-3 inline-block font-bold">
+                hi@axolotmedia.com
               </a>
             </div>
           </div>
@@ -161,27 +191,28 @@
     <div class="max-w-7xl mx-auto flex flex-col items-center gap-8">
       <div class="flex items-center gap-4">
         <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.png" />
-        <span class="text-3xl font-black tracking-tighter">Axolotl Media</span>
+        <span class="text-3xl font-black tracking-tighter">Axolot Media</span>
       </div>
       <div class="flex flex-wrap justify-center gap-12 font-sketch text-2xl">
-        <a class="hover:text-primary transition-colors flex items-center gap-2" href="#" target="_blank" rel="noopener noreferrer">
+        <a class="hover:text-primary transition-colors flex items-center gap-2" href="contact.html">
           <i data-lucide="message-square" style="width:24px;height:24px;"></i> Send a DM
         </a>
-        <a class="hover:text-secondary transition-colors flex items-center gap-2" href="mailto:hello@axolotlmedia.com">
+        <a class="hover:text-secondary transition-colors flex items-center gap-2" href="mailto:hi@axolotmedia.com">
           <i data-lucide="mail" style="width:24px;height:24px;"></i> Gmail
         </a>
         <a class="hover:text-primary transition-colors text-lg font-body" href="terms.html">Terms</a>
         <a class="hover:text-primary transition-colors text-lg font-body" href="privacy.html">Privacy</a>
       </div>
       <div class="bg-white/10 px-6 py-2 rounded-full font-sketch text-lg border border-white/20">
-        Hand-made with 💚 and zero AI.
+        Hand-made with 💚 <span style="font-size:0.75em;">(for money).</span>
       </div>
       <p class="font-medium text-sm text-white/40 mt-4">
-        © 2026 Axolotl Media. We are serious, serious businessmen owo
+        © 2026 Axolot Media. We are serious, serious businessmen owo
       </p>
     </div>
   </footer>
 
   <script>lucide.createIcons();</script>
 </body>
+
 </html>
