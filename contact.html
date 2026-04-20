@@ -113,43 +113,75 @@
           <!-- Contact Form -->
           <div class="bg-white p-8 sketch-border" style="transform:rotate(1deg);">
             <h2 class="font-headline text-3xl font-black mb-6">Send a Message</h2>
+
+            <!-- Success message (hidden by default) -->
+            <div id="form-success" class="hidden text-center py-10">
+              <div class="text-6xl mb-4">🎉</div>
+              <h3 class="font-headline text-2xl font-black text-primary mb-2">Message sent successfully!</h3>
+              <p class="font-sketch text-xl text-on-surface/70">We'll get back to you ASAP. Thanks!</p>
+            </div>
+
             <form class="space-y-6" id="contact-form">
+              <!-- FormSubmit config (optional but good to have) -->
+              <input type="hidden" name="_subject" value="New message from Axolot Media website">
+              <input type="hidden" name="_captcha" value="false">
+              
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">Name / Sona</label>
-                <input type="text" id="form-name"
+                <input type="text" name="name" required
                   class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="How should we call you?" />
               </div>
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">Email</label>
-                <input type="email" id="form-email"
+                <input type="email" name="email" required
                   class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Where can we reach you?" />
               </div>
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">What's on your mind?</label>
-                <textarea id="form-message"
+                <textarea name="message" required
                   class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary h-32 resize-none"
                   placeholder="Tell us about your project, your goals, or just say hi!"></textarea>
               </div>
-              <button type="submit"
-                class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg]">
-                <i data-lucide="send" style="width:20px;height:20px;"></i> Send Message
+              <button type="submit" id="submit-btn"
+                class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg] transition-all">
+                <i data-lucide="send" style="width:20px;height:20px;"></i>
+                <span id="submit-label">Send Message</span>
               </button>
             </form>
+
             <script>
-              document.getElementById('contact-form').addEventListener('submit', function(e) {
+              document.getElementById('contact-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const name    = document.getElementById('form-name').value;
-                const email   = document.getElementById('form-email').value;
-                const message = document.getElementById('form-message').value;
-                const subject = encodeURIComponent('Message from ' + (name || 'the website'));
-                const body    = encodeURIComponent(
-                  'Name / Sona: ' + name + '\n' +
-                  'Email: ' + email + '\n\n' +
-                  message
-                );
-                window.location.href = 'mailto:hi@axolotmedia.com?subject=' + subject + '&body=' + body;
+                const btn = document.getElementById('submit-btn');
+                const label = document.getElementById('submit-label');
+                btn.disabled = true;
+                label.textContent = 'Sending...';
+                
+                const formData = new FormData(this);
+                
+                try {
+                  const res = await fetch('https://formsubmit.co/ajax/hi@axolotmedia.com', {
+                    method: 'POST',
+                    headers: { 
+                      'Accept': 'application/json'
+                    },
+                    body: formData
+                  });
+                  const data = await res.json();
+                  
+                  if (data.success || data.success === 'true') {
+                    document.getElementById('contact-form').style.display = 'none';
+                    document.getElementById('form-success').classList.remove('hidden');
+                  } else {
+                    label.textContent = 'Error — try again';
+                    btn.disabled = false;
+                  }
+                } catch(err) {
+                  label.textContent = 'Error — try again';
+                  btn.disabled = false;
+                }
               });
             </script>
           </div>
@@ -164,8 +196,6 @@
                 The fastest way to reach us. Send a direct message to our account and we'll get back to you ASAP!
               </p>
               <a href="discord.html"
-                onclick="window.location.href='discord:///users/1495845952852852948';"
-                target="_blank" rel="noopener noreferrer"
                 class="sketch-button inline-block text-white px-6 py-3 font-bold" style="background:#5865F2;">
                 Message Us on Discord
               </a>
@@ -176,12 +206,12 @@
                 <i data-lucide="mail" style="width:22px;height:22px;color:#06b6d4;"></i> Direct Email
               </h3>
               <p class="mb-6 font-medium text-on-surface/80">
-                Prefer the classic way? Shoot us an email directly and we'll get back to you within 24 hours.
+                Prefer the classic way? You can also reach us directly at our email. Click to copy!
               </p>
-              <a href="mailto:hi@axolotmedia.com"
-                class="sketch-button bg-primary text-on-surface px-6 py-3 inline-block font-bold">
+              <button onclick="navigator.clipboard.writeText('hi@axolotmedia.com').then(()=>{ this.textContent='Copied! ✓'; this.style.background='#00d084'; setTimeout(()=>{ this.textContent='hi@axolotmedia.com'; this.style.background=''; },2000); })"
+                class="sketch-button bg-primary text-on-surface px-6 py-3 font-bold cursor-pointer transition-all">
                 hi@axolotmedia.com
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -200,9 +230,9 @@
         <a class="hover:text-primary transition-colors flex items-center gap-2" href="discord.html">
           <i data-lucide="message-square" style="width:24px;height:24px;"></i> Send a DM
         </a>
-        <a class="hover:text-secondary transition-colors flex items-center gap-2" href="mailto:hi@axolotmedia.com">
+        <button onclick="navigator.clipboard.writeText('hi@axolotmedia.com').then(()=>{ this.textContent='Copied! ✓'; setTimeout(()=>{ this.innerHTML='<i data-lucide=\'mail\' style=\'width:24px;height:24px;\'></i> Gmail'; lucide.createIcons(); },2000); })" class="hover:text-secondary transition-colors flex items-center gap-2 font-sketch text-2xl bg-transparent border-none cursor-pointer text-white">
           <i data-lucide="mail" style="width:24px;height:24px;"></i> Gmail
-        </a>
+        </button>
         <a class="hover:text-primary transition-colors text-lg font-body" href="terms.html">Terms</a>
         <a class="hover:text-primary transition-colors text-lg font-body" href="privacy.html">Privacy</a>
       </div>
