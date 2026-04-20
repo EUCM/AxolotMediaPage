@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="logo1.png" />
+  <title>Find Us on Discord | Axolot Media</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-headline: "Plus Jakarta Sans", sans-serif;
+      --font-body: "Be Vietnam Pro", sans-serif;
+      --font-sketch: "Gochi Hand", cursive;
+      --color-primary: #00d084;
+      --color-secondary: #06b6d4;
+      --color-tertiary: #2dd4bf;
+      --color-background: #f8fafc;
+      --color-on-surface: #0f172a;
+      --color-surface: #ffffff;
+      --color-paper: #fefce8;
+    }
+    @layer base {
+      html { scroll-behavior: smooth; }
+      body {
+        @apply font-body text-on-surface overflow-x-hidden;
+        background: linear-gradient(135deg, #61cef8 0%, #64fc8a 100%);
+        background-attachment: fixed;
+      }
+      body::before {
+        content: "";
+        @apply fixed inset-0 pointer-events-none;
+        z-index: 1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.04;
+      }
+    }
+    @layer components {
+      .sketch-border {
+        @apply border-[3px] border-on-surface relative;
+        z-index: 10;
+        box-shadow: 4px 4px 0 #0f172a;
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      }
+      .sketch-button {
+        @apply border-2 border-on-surface relative transition-all duration-200;
+        z-index: 10;
+        box-shadow: 3px 3px 0 #0f172a;
+      }
+      .sketch-button:active {
+        transform: translate(3px, 3px);
+        box-shadow: 0 0 0 #0f172a;
+      }
+      .magic-decoration {
+        @apply fixed rounded-full pointer-events-none opacity-40;
+        z-index: -10;
+        filter: blur(80px);
+      }
+      .discord-card {
+        background: #313338;
+        color: white;
+      }
+      .discord-banner {
+        background: linear-gradient(135deg, #5865F2 0%, #4752c4 100%);
+        height: 96px;
+        border-radius: 8px 8px 0 0;
+      }
+      .copy-field {
+        @apply flex items-center justify-between gap-3 bg-white/10 px-4 py-3 rounded-lg cursor-pointer transition-all duration-200;
+      }
+      .copy-field:hover {
+        @apply bg-white/20;
+      }
+    }
+    @keyframes floating {
+      0%   { transform: translate(0, 0px); }
+      50%  { transform: translate(0, -15px); }
+      100% { transform: translate(0, 0px); }
+    }
+    .floating { animation: floating 3s ease-in-out infinite; }
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.8) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .pop-in { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Magical Background Elements -->
+  <div class="magic-decoration w-[500px] h-[500px] bg-white" style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
+  <div class="magic-decoration w-[600px] h-[600px]" style="background:#5865F2;bottom:-10%;right:-10%;opacity:0.15;filter:blur(100px);position:fixed;border-radius:50%;pointer-events:none;z-index:-10;"></div>
+  <div class="magic-decoration w-[400px] h-[400px] bg-blue-300 opacity-30" style="top:40%;right:-5%;"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
+    <a href="index.html" class="flex items-center gap-3">
+      <img alt="Axolot Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
+      <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolot Media</span>
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-semibold text-sm">
+      <a href="index.html#how" class="hover:text-primary transition-colors">How we help</a>
+      <a href="index.html#mix-your-own" class="hover:text-primary transition-colors">Build Your Setup</a>
+      <a href="contact.html" class="hover:text-primary transition-colors">Say Hi!</a>
+    </div>
+    <a href="index.html#mix-your-own" class="sketch-button bg-primary px-5 py-2 rounded-lg font-bold text-sm inline-block">
+      Let's Grow
+    </a>
+  </nav>
+
+  <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-6">
+    <div class="max-w-lg w-full mx-auto">
+
+      <!-- Heading -->
+      <div class="text-center mb-10">
+        <h1 class="font-headline text-4xl md:text-5xl font-black mb-3">
+          Find Us on <span style="color:#5865F2;">Discord</span>
+        </h1>
+        <p class="font-sketch text-xl text-on-surface/80">
+          Can't open the link directly? Here's everything you need to find us and send a DM!
+        </p>
+      </div>
+
+      <!-- Discord Card (realistic mock) -->
+      <div class="sketch-border overflow-hidden pop-in" style="transform:rotate(-0.5deg);">
+        <div class="discord-card">
+          <!-- Banner -->
+          <div class="discord-banner relative">
+            <div class="absolute inset-0 opacity-20" style="background: repeating-linear-gradient(45deg, #fff 0px, #fff 1px, transparent 0px, transparent 50%) 0/10px 10px;"></div>
+          </div>
+
+          <!-- Avatar section -->
+          <div class="px-6 pb-6">
+            <div class="flex items-end gap-4 -mt-12 mb-4">
+              <div class="relative shrink-0">
+                <img src="logo3.png" alt="Axolot Media avatar" class="w-24 h-24 rounded-full border-[5px] border-[#313338] bg-[#313338]" />
+                <!-- Online indicator -->
+                <span class="absolute bottom-1 right-1 w-5 h-5 rounded-full border-[3px] border-[#313338]" style="background:#23a55a;"></span>
+              </div>
+              <div class="pb-1">
+                <!-- Badge row -->
+                <div class="flex items-center gap-1 mb-1">
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded" style="background:#5865F2;">NITRO</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Name -->
+            <div class="mb-4">
+              <h2 class="text-white font-black text-2xl leading-tight">Axolot Media</h2>
+              <p class="text-white/60 text-sm font-medium">axolotmedia <span class="text-white/30">•</span> he/him</p>
+            </div>
+
+            <!-- Info fields -->
+            <div class="space-y-3 mb-6">
+              <div>
+                <p class="text-white/40 text-xs font-bold uppercase tracking-wider mb-1">Username</p>
+                <div class="copy-field group" onclick="copyText('axolotmedia', this)" title="Click to copy">
+                  <span class="text-white font-mono font-semibold">axolotmedia</span>
+                  <i data-lucide="copy" style="width:16px;height:16px;color:rgba(255,255,255,0.4);" class="group-hover:text-white transition-colors shrink-0"></i>
+                </div>
+              </div>
+              <div>
+                <p class="text-white/40 text-xs font-bold uppercase tracking-wider mb-1">User ID</p>
+                <div class="copy-field group" onclick="copyText('1495845952852852948', this)" title="Click to copy">
+                  <span class="text-white font-mono font-semibold">1495845952852852948</span>
+                  <i data-lucide="copy" style="width:16px;height:16px;color:rgba(255,255,255,0.4);" class="group-hover:text-white transition-colors shrink-0"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Direct DM button -->
+            <a href="discord:///users/1495845952852852948"
+               onclick="setTimeout(function(){ window.open('https://discord.com/users/1495845952852852948','_blank'); }, 800);"
+               class="flex items-center justify-center gap-3 w-full py-3 rounded-lg font-bold text-white text-lg transition-all hover:opacity-90 active:scale-95"
+               style="background:#5865F2;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+              </svg>
+              Open DM in Discord
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manual steps -->
+      <div class="mt-8 bg-white sketch-border p-6" style="transform:rotate(0.5deg);">
+        <h3 class="font-headline text-xl font-black mb-4 flex items-center gap-2">
+          <i data-lucide="info" style="width:20px;height:20px;color:#06b6d4;"></i>
+          How to send a DM manually
+        </h3>
+        <ol class="space-y-3 text-on-surface/80 font-medium">
+          <li class="flex gap-3">
+            <span class="font-sketch text-xl text-primary leading-tight shrink-0">1.</span>
+            <span>Open <strong>Discord</strong> and click the <strong>search bar</strong> (or press <code class="bg-on-surface/10 px-1.5 py-0.5 rounded text-sm">Ctrl+K</code>)</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-sketch text-xl text-primary leading-tight shrink-0">2.</span>
+            <span>Type <code class="bg-on-surface/10 px-2 py-0.5 rounded text-sm font-mono">axolotmedia</code> and look for our account</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-sketch text-xl text-primary leading-tight shrink-0">3.</span>
+            <span>Click on our profile and hit <strong>"Message"</strong> to start a DM</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-sketch text-xl text-primary leading-tight shrink-0">4.</span>
+            <span>If you can't find us by username, use the <strong>User ID</strong> above — click it to copy!</span>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Back button -->
+      <div class="text-center mt-8">
+        <a href="contact.html" class="sketch-button bg-on-surface text-white px-8 py-3 inline-flex items-center gap-2 font-bold hover:rotate-[-1deg] transition-transform">
+          <i data-lucide="arrow-left" style="width:18px;height:18px;"></i> Back to Contact
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-16 px-6 bg-on-surface text-white rounded-t-[4rem] relative mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.png" />
+        <span class="text-3xl font-black tracking-tighter">Axolot Media</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-12 font-sketch text-2xl">
+        <a class="hover:text-primary transition-colors flex items-center gap-2" href="discord.html">
+          <i data-lucide="message-square" style="width:24px;height:24px;"></i> Send a DM
+        </a>
+        <a class="hover:text-secondary transition-colors flex items-center gap-2" href="mailto:hi@axolotmedia.com">
+          <i data-lucide="mail" style="width:24px;height:24px;"></i> Gmail
+        </a>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="terms.html">Terms</a>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="privacy.html">Privacy</a>
+      </div>
+      <div class="bg-white/10 px-6 py-2 rounded-full font-sketch text-lg border border-white/20">
+        Hand-made with 💚 <span style="font-size:0.75em;">(for money).</span>
+      </div>
+      <p class="font-medium text-sm text-white/40 mt-4">
+        © 2026 Axolot Media. We are serious, serious businessmen owo
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function copyText(text, el) {
+      navigator.clipboard.writeText(text).then(() => {
+        const icon = el.querySelector('[data-lucide="copy"]');
+        const original = el.innerHTML;
+        el.innerHTML = el.innerHTML.replace('copy', 'check');
+        el.style.background = 'rgba(0,208,132,0.25)';
+        lucide.createIcons();
+        setTimeout(() => {
+          el.innerHTML = original;
+          el.style.background = '';
+          lucide.createIcons();
+        }, 1800);
+      });
+    }
+  </script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
