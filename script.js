@@ -56,10 +56,10 @@ const mixYourOwn = {
     {
       name: "Growth & Acquisition",
       options: [
-        { id: "ga1", label: "Artist Hub! (Web Design, SEO, Forms, 1yr Hosting) [+ $30-$60/mo Maintenance]", priceMin: 500, priceMax: 1200, isMonthly: false },
-        { id: "ga2", label: "Active Dealer Representation (We source clients in Telegram, Discord, Forums) [+ 10-15% commission]", priceMin: 150, priceMax: 300, isMonthly: true },
-        { id: "ga3", label: "Launch Campaign! (1-Month Intensive Ads + 4-8 Viral Reels/TikToks)", priceMin: 600, priceMax: 1500, isMonthly: false },
-        { id: "ga4", label: "Brand & Pricing Audit (Visual Style Review, Price Sheet Optimization, Brand Bible)", priceMin: 200, priceMax: 450, isMonthly: false }
+        { id: "ga1", label: "Artist Hub! (Web portafolio)", priceMin: 500, priceMax: 1200, isMonthly: false },
+        { id: "ga2", label: "Active Dealer Representation", priceMin: 150, priceMax: 300, isMonthly: true },
+        { id: "ga3", label: "Launch Campaign", priceMin: 600, priceMax: 1500, isMonthly: false },
+        { id: "ga4", label: "Brand & Pricing Audit", priceMin: 200, priceMax: 450, isMonthly: false }
       ]
     }
   ]
