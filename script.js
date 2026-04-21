@@ -52,6 +52,15 @@ const mixYourOwn = {
         { id: "ev4", label: "Pre-convention Hype Campaign & Commission Openings", priceMin: 150, priceMax: 400, isMonthly: false },
         { id: "ev5", label: "Business Card, Badge & Sticker Design", priceMin: 100, priceMax: 350, isMonthly: false }
       ]
+    },
+    {
+      name: "Growth & Acquisition",
+      options: [
+        { id: "ga1", label: "Artist Hub! (Web Design, SEO, Forms, 1yr Hosting) [+ $30-$60/mo Maintenance]", priceMin: 500, priceMax: 1200, isMonthly: false },
+        { id: "ga2", label: "Active Dealer Representation (We source clients in Telegram, Discord, Forums) [+ 10-15% commission]", priceMin: 150, priceMax: 300, isMonthly: true },
+        { id: "ga3", label: "Launch Campaign! (1-Month Intensive Ads + 4-8 Viral Reels/TikToks)", priceMin: 600, priceMax: 1500, isMonthly: false },
+        { id: "ga4", label: "Brand & Pricing Audit (Visual Style Review, Price Sheet Optimization, Brand Bible)", priceMin: 200, priceMax: 450, isMonthly: false }
+      ]
     }
   ]
 };
