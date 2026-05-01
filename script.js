@@ -71,11 +71,13 @@ const expandedCategories = {};
 
 function updateTotals() {
   let monthlyMin = 0, monthlyMax = 0, oneTimeMin = 0, oneTimeMax = 0;
+  let selectedLabels = [];
   mixYourOwn.categories.forEach(cat => {
     cat.options.forEach(opt => {
       if (selectedOptions[opt.id]) {
         if (opt.isMonthly) { monthlyMin += opt.priceMin; monthlyMax += opt.priceMax; }
         else               { oneTimeMin += opt.priceMin; oneTimeMax += opt.priceMax; }
+        selectedLabels.push(opt.label);
       }
     });
   });
@@ -86,6 +88,23 @@ function updateTotals() {
     `$${monthlyMin.toLocaleString()} <span class="text-2xl text-on-surface/50">-</span> $${monthlyMax.toLocaleString()}`;
   document.getElementById('onetime-total').innerHTML =
     `$${oneTimeMin.toLocaleString()} <span class="text-xl text-on-surface/50">-</span> $${oneTimeMax.toLocaleString()}`;
+
+  const requestBtn = document.getElementById('request-setup-btn');
+  if (requestBtn) {
+    if (selectedLabels.length > 0 || totalAdSpend > 0) {
+      requestBtn.href = `contact.html?setup=1`;
+      let setupData = {
+        services: selectedLabels,
+        adBudget: totalAdSpend,
+        monthlyTotal: `$${monthlyMin.toLocaleString()} - $${monthlyMax.toLocaleString()}`,
+        oneTimeTotal: `$${oneTimeMin.toLocaleString()} - $${oneTimeMax.toLocaleString()}`
+      };
+      localStorage.setItem('axolotSetup', JSON.stringify(setupData));
+    } else {
+      requestBtn.href = `contact.html`;
+      localStorage.removeItem('axolotSetup');
+    }
+  }
 }
 
 function renderCategories() {

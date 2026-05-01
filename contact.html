@@ -114,6 +114,19 @@
           <div class="bg-white p-8 sketch-border" style="transform:rotate(1deg);">
             <h2 class="font-headline text-3xl font-black mb-6">Send a Message</h2>
 
+            <!-- Selected Services Section (Hidden by default) -->
+            <div id="selected-setup-section" class="hidden mb-6 p-6 bg-primary/10 sketch-border border-primary" style="transform:rotate(-1deg);">
+              <h3 class="font-headline text-xl font-black text-primary mb-3 flex items-center gap-2">
+                <i data-lucide="check-circle" style="width:20px;height:20px;"></i> Your Selected Setup
+              </h3>
+              <ul id="setup-services-list" class="list-disc list-inside font-medium text-sm text-on-surface/80 space-y-1 mb-4">
+              </ul>
+              <div class="flex justify-between font-bold text-sm border-t-2 border-primary/20 pt-3">
+                <span>Monthly: <span id="setup-monthly" class="font-sketch text-lg"></span></span>
+                <span>One-time: <span id="setup-onetime" class="font-sketch text-lg"></span></span>
+              </div>
+            </div>
+
             <!-- Success message (hidden by default) -->
             <div id="form-success" class="hidden text-center py-10">
               <div class="text-6xl mb-4">🎉</div>
@@ -125,6 +138,8 @@
               <!-- FormSubmit config (optional but good to have) -->
               <input type="hidden" name="_subject" value="New message from Axolot Media website">
               <input type="hidden" name="_captcha" value="false">
+              <!-- Hidden input to hold setup details for the email -->
+              <textarea name="Requested_Setup" id="requested-setup-input" style="display:none;"></textarea>
               
               <div>
                 <label class="block font-bold mb-2 font-sketch text-xl">Name / Sona</label>
@@ -181,6 +196,59 @@
                 } catch(err) {
                   label.textContent = 'Error — try again';
                   btn.disabled = false;
+                }
+              });
+              document.addEventListener('DOMContentLoaded', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('setup') === '1') {
+                  const setupDataStr = localStorage.getItem('axolotSetup');
+                  if (setupDataStr) {
+                    try {
+                      const setupData = JSON.parse(setupDataStr);
+                      const section = document.getElementById('selected-setup-section');
+                      const list = document.getElementById('setup-services-list');
+                      const monthly = document.getElementById('setup-monthly');
+                      const onetime = document.getElementById('setup-onetime');
+                      const hiddenInput = document.getElementById('requested-setup-input');
+                      
+                      let servicesText = "SELECTED SERVICES:\n\n";
+                      setupData.services.forEach(srv => {
+                        const li = document.createElement('li');
+                        li.textContent = srv;
+                        list.appendChild(li);
+                        servicesText += "- " + srv + "\n";
+                      });
+                      
+                      if (setupData.adBudget > 0) {
+                        const li = document.createElement('li');
+                        li.textContent = `Ad Boost Budget: $${setupData.adBudget}`;
+                        list.appendChild(li);
+                        servicesText += `- Ad Boost Budget: $${setupData.adBudget}\n`;
+                      }
+                      
+                      monthly.innerHTML = setupData.monthlyTotal;
+                      onetime.innerHTML = setupData.oneTimeTotal;
+                      
+                      servicesText += `\nEstimated Monthly: ${setupData.monthlyTotal}`;
+                      servicesText += `\nEstimated One-Time: ${setupData.oneTimeTotal}`;
+                      
+                      hiddenInput.value = servicesText;
+                      section.classList.remove('hidden');
+                      
+                      // Update form subject
+                      const subjectInput = document.querySelector('input[name="_subject"]');
+                      if (subjectInput) {
+                        subjectInput.value = "New Setup Request from Axolot Media";
+                      }
+                      
+                      // Re-init icons for newly added ones
+                      if (window.lucide) {
+                        lucide.createIcons();
+                      }
+                    } catch(e) {
+                      console.error("Error parsing setup data", e);
+                    }
+                  }
                 }
               });
             </script>
