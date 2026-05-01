@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="logo1.png" />
+  <title>Contact | Axolot Media</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-headline: "Plus Jakarta Sans", sans-serif;
+      --font-body: "Be Vietnam Pro", sans-serif;
+      --font-sketch: "Gochi Hand", cursive;
+      --color-primary: #00d084;
+      --color-secondary: #06b6d4;
+      --color-tertiary: #2dd4bf;
+      --color-background: #f8fafc;
+      --color-on-surface: #0f172a;
+      --color-surface: #ffffff;
+      --color-paper: #fefce8;
+    }
+    @layer base {
+      html { scroll-behavior: smooth; }
+      body {
+        @apply font-body text-on-surface overflow-x-hidden;
+        background: linear-gradient(135deg, #61cef8 0%, #64fc8a 100%);
+        background-attachment: fixed;
+      }
+      body::before {
+        content: "";
+        @apply fixed inset-0 pointer-events-none;
+        z-index: 1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.04;
+      }
+    }
+    @layer components {
+      .sketch-border {
+        @apply border-[3px] border-on-surface relative;
+        z-index: 10;
+        box-shadow: 4px 4px 0 #0f172a;
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      }
+      .sketch-button {
+        @apply border-2 border-on-surface relative transition-all duration-200;
+        z-index: 10;
+        box-shadow: 3px 3px 0 #0f172a;
+      }
+      .sketch-button:active {
+        transform: translate(3px, 3px);
+        box-shadow: 0 0 0 #0f172a;
+      }
+      .magic-decoration {
+        @apply fixed rounded-full pointer-events-none opacity-40;
+        z-index: -10;
+        filter: blur(80px);
+      }
+    }
+    @keyframes floating {
+      0%   { transform: translate(0, 0px); }
+      50%  { transform: translate(0, -15px); }
+      100% { transform: translate(0, 0px); }
+    }
+    .floating { animation: floating 3s ease-in-out infinite; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <!-- Magical Background Elements -->
+  <div class="magic-decoration w-[500px] h-[500px] bg-white"
+    style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
+  <div class="magic-decoration w-[600px] h-[600px] bg-yellow-200" style="bottom:-10%;right:-10%;"></div>
+  <div class="magic-decoration w-[400px] h-[400px] bg-blue-300 opacity-30" style="top:40%;right:-5%;"></div>
+  <div class="magic-decoration w-[300px] h-[300px] bg-green-200 opacity-20" style="bottom:30%;left:-5%;"></div>
+
+  <!-- Navigation -->
+  <nav
+    class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
+    <a href="index.html" class="flex items-center gap-3">
+      <img alt="Axolot Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
+      <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolot Media</span>
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-semibold text-sm">
+      <a href="index.html#how" class="hover:text-primary transition-colors">How we help</a>
+      <a href="index.html#mix-your-own" class="hover:text-primary transition-colors">Build Your Setup</a>
+      <a href="contact.html" class="hover:text-primary transition-colors">Say Hi!</a>
+    </div>
+    <a href="index.html#mix-your-own"
+      class="sketch-button bg-primary px-5 py-2 rounded-lg font-bold text-sm inline-block">
+      Let's Grow
+    </a>
+  </nav>
+
+  <main class="flex-grow">
+    <div class="min-h-screen pt-32 pb-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="font-headline text-5xl md:text-7xl font-black mb-6">
+            Let's <span class="text-primary">Chat</span>
+          </h1>
+          <p class="font-sketch text-2xl text-on-surface/80 max-w-2xl mx-auto">
+            We want you to succeed; for us to win, you have to win, so let's talk about you!
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div class="bg-white p-8 sketch-border" style="transform:rotate(1deg);">
+            <h2 class="font-headline text-3xl font-black mb-6">Send a Message</h2>
+
+            <!-- Success message (hidden by default) -->
+            <div id="form-success" class="hidden text-center py-10">
+              <div class="text-6xl mb-4">🎉</div>
+              <h3 class="font-headline text-2xl font-black text-primary mb-2">Message sent successfully!</h3>
+              <p class="font-sketch text-xl text-on-surface/70">We'll get back to you ASAP. Thanks!</p>
+            </div>
+
+            <form class="space-y-6" id="contact-form">
+              <!-- FormSubmit config (optional but good to have) -->
+              <input type="hidden" name="_subject" value="New message from Axolot Media website">
+              <input type="hidden" name="_captcha" value="false">
+              
+              <div>
+                <label class="block font-bold mb-2 font-sketch text-xl">Name / Sona</label>
+                <input type="text" name="name" required
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="How should we call you?" />
+              </div>
+              <div>
+                <label class="block font-bold mb-2 font-sketch text-xl">Email</label>
+                <input type="email" name="email" required
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Where can we reach you?" />
+              </div>
+              <div>
+                <label class="block font-bold mb-2 font-sketch text-xl">What's on your mind?</label>
+                <textarea name="message" required
+                  class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary h-32 resize-none"
+                  placeholder="Tell us about your project, your goals, or just say hi!"></textarea>
+              </div>
+              <button type="submit" id="submit-btn"
+                class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg] transition-all">
+                <i data-lucide="send" style="width:20px;height:20px;"></i>
+                <span id="submit-label">Send Message</span>
+              </button>
+            </form>
+
+            <script>
+              document.getElementById('contact-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                const label = document.getElementById('submit-label');
+                btn.disabled = true;
+                label.textContent = 'Sending...';
+                
+                const formData = new FormData(this);
+                
+                try {
+                  const res = await fetch('https://formsubmit.co/ajax/hi@axolotmedia.com', {
+                    method: 'POST',
+                    headers: { 
+                      'Accept': 'application/json'
+                    },
+                    body: formData
+                  });
+                  const data = await res.json();
+                  
+                  if (data.success || data.success === 'true') {
+                    document.getElementById('contact-form').style.display = 'none';
+                    document.getElementById('form-success').classList.remove('hidden');
+                  } else {
+                    label.textContent = 'Error — try again';
+                    btn.disabled = false;
+                  }
+                } catch(err) {
+                  label.textContent = 'Error — try again';
+                  btn.disabled = false;
+                }
+              });
+            </script>
+          </div>
+
+          <!-- Other ways to connect -->
+          <div class="flex flex-col gap-8">
+            <div class="bg-paper p-8 sketch-border" style="transform:rotate(-1deg);">
+              <h3 class="font-headline text-2xl font-black mb-4 flex items-center gap-3">
+                <i data-lucide="message-square" style="width:22px;height:22px;color:#00d084;"></i> Send us a DM
+              </h3>
+              <p class="mb-6 font-medium text-on-surface/80">
+                The fastest way to reach us. Send a direct message to our account and we'll get back to you ASAP!
+              </p>
+              <a href="discord.html"
+                class="sketch-button inline-block text-white px-6 py-3 font-bold" style="background:#5865F2;">
+                Message Us on Discord
+              </a>
+            </div>
+
+            <div class="bg-white p-8 sketch-border" style="transform:rotate(2deg);">
+              <h3 class="font-headline text-2xl font-black mb-4 flex items-center gap-3">
+                <i data-lucide="mail" style="width:22px;height:22px;color:#06b6d4;"></i> Direct Email
+              </h3>
+              <p class="mb-6 font-medium text-on-surface/80">
+                Prefer the classic way? You can also reach us directly at our email. Click to copy!
+              </p>
+              <button onclick="navigator.clipboard.writeText('hi@axolotmedia.com').then(()=>{ this.textContent='Copied! ✓'; this.style.background='#00d084'; setTimeout(()=>{ this.textContent='hi@axolotmedia.com'; this.style.background=''; },2000); })"
+                class="sketch-button bg-primary text-on-surface px-6 py-3 font-bold cursor-pointer transition-all">
+                hi@axolotmedia.com
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-16 px-6 bg-on-surface text-white rounded-t-[4rem] relative mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.png" />
+        <span class="text-3xl font-black tracking-tighter">Axolot Media</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-12 font-sketch text-2xl">
+        <a class="hover:text-primary transition-colors flex items-center gap-2" href="discord.html">
+          <i data-lucide="message-square" style="width:24px;height:24px;"></i> Send a DM
+        </a>
+        <button onclick="navigator.clipboard.writeText('hi@axolotmedia.com').then(()=>{ this.textContent='Copied! ✓'; setTimeout(()=>{ this.innerHTML='<i data-lucide=\'mail\' style=\'width:24px;height:24px;\'></i> Gmail'; lucide.createIcons(); },2000); })" class="hover:text-secondary transition-colors flex items-center gap-2 font-sketch text-2xl bg-transparent border-none cursor-pointer text-white">
+          <i data-lucide="mail" style="width:24px;height:24px;"></i> Gmail
+        </button>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="terms.html">Terms</a>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="privacy.html">Privacy</a>
+      </div>
+      <div class="bg-white/10 px-6 py-2 rounded-full font-sketch text-lg border border-white/20">
+        Hand-made with 💚 <span style="font-size:0.75em;">(for money).</span>
+      </div>
+      <p class="font-medium text-sm text-white/40 mt-4">
+        © 2026 Axolot Media. We are serious, serious businessmen owo
+      </p>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+
+</html>

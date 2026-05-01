@@ -1,16 +1,329 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/logo1.png" />
-    <title>Axolotl Media | Spread the Word for Furry Creatives</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="logo1.png" />
+  <title>Axolot Media | Spread the Word for Furry Creatives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --font-headline: "Plus Jakarta Sans", sans-serif;
+      --font-body: "Be Vietnam Pro", sans-serif;
+      --font-sketch: "Gochi Hand", cursive;
+      --color-primary: #00d084;
+      --color-secondary: #06b6d4;
+      --color-tertiary: #2dd4bf;
+      --color-background: #f8fafc;
+      --color-on-surface: #0f172a;
+      --color-surface: #ffffff;
+      --color-paper: #fefce8;
+    }
 
+    @layer base {
+      html { scroll-behavior: smooth; }
+      body {
+        @apply font-body text-on-surface overflow-x-hidden;
+        background: linear-gradient(135deg, #61cef8 0%, #64fc8a 100%);
+        background-attachment: fixed;
+      }
+      body::before {
+        content: "";
+        @apply fixed inset-0 pointer-events-none;
+        z-index: 1;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.04;
+      }
+    }
+
+    @layer components {
+      .sketch-border {
+        @apply border-[3px] border-on-surface relative;
+        z-index: 10;
+        box-shadow: 4px 4px 0 #0f172a;
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+      }
+      .sketch-button {
+        @apply border-2 border-on-surface relative transition-all duration-200;
+        z-index: 10;
+        box-shadow: 3px 3px 0 #0f172a;
+      }
+      .sketch-button:active {
+        transform: translate(3px, 3px);
+        box-shadow: 0 0 0 #0f172a;
+      }
+      .marker-highlight {
+        background: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 0.4em;
+        background-position: 0 88%;
+      }
+      .magic-decoration {
+        @apply fixed rounded-full pointer-events-none opacity-40;
+        z-index: -10;
+        filter: blur(80px);
+      }
+    }
+
+    @keyframes floating {
+      0%   { transform: translate(0, 0px); }
+      50%  { transform: translate(0, -15px); }
+      100% { transform: translate(0, 0px); }
+    }
+    .floating { animation: floating 3s ease-in-out infinite; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Magical Background Elements -->
+  <div class="magic-decoration w-[500px] h-[500px] bg-white" style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
+  <div class="magic-decoration w-[600px] h-[600px] bg-yellow-200" style="bottom:-10%;right:-10%;"></div>
+  <div class="magic-decoration w-[400px] h-[400px] bg-blue-300 opacity-30" style="top:40%;right:-5%;"></div>
+  <div class="magic-decoration w-[300px] h-[300px] bg-green-200 opacity-20" style="bottom:30%;left:-5%;"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
+    <a href="index.html" class="flex items-center gap-3">
+      <img alt="Axolotl Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
+      <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolot Media</span>
+    </a>
+    <div class="hidden md:flex gap-8 items-center font-semibold text-sm">
+      <a href="#how" class="hover:text-primary transition-colors">How we help</a>
+      <a href="#mix-your-own" class="hover:text-primary transition-colors">Build Your Setup</a>
+      <a href="contact.html" class="hover:text-primary transition-colors">Say Hi!</a>
+    </div>
+    <a href="#mix-your-own" class="sketch-button bg-primary px-5 py-2 rounded-lg font-bold text-sm inline-block">
+      Let's Grow
+    </a>
+  </nav>
+
+  <main class="flex-grow">
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+      <div class="absolute top-20 right-[10%] opacity-10 floating">
+        <i data-lucide="brush" style="width:150px;height:150px;"></i>
+      </div>
+      <div class="absolute bottom-20 left-[5%] opacity-10 rotate-12">
+        <i data-lucide="palette" style="width:200px;height:200px;"></i>
+      </div>
+
+      <div class="max-w-4xl text-center z-10 mx-auto">
+        <div class="mb-6 inline-block bg-white p-4 sketch-border shadow-xl" style="transform:rotate(-2deg);">
+          <img alt="Axolot Media" class="h-32 w-auto mx-auto rounded-3xl" src="logo3.png" />
+        </div>
+
+        <h1 class="font-headline font-black mb-6 leading-tight flex flex-col items-center justify-center text-center">
+          <span class="text-3xl md:text-5xl text-on-surface/90 mb-2">Let's Make Your</span>
+          <span class="text-5xl md:text-8xl flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+            <span class="text-secondary drop-shadow-md">Passion</span>
+            <span class="text-on-surface">Your</span>
+            <span class="text-primary drop-shadow-md">Livelihood.</span>
+          </span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-on-surface/80 max-w-2xl mx-auto leading-relaxed font-medium font-sketch">
+          From furries, for furries, to furries. We'll help you turn your passion into a business or make your business more successful. Whether you make fursuits, are an influencer, create art, or sell any kind of product, you put in a lot of hours and you deserve more money. We handle everything so you can keep doing what you love.
+        </p>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href="#mix-your-own" class="sketch-button bg-secondary text-white px-10 py-5 rounded-xl text-xl font-black hover:rotate-1">
+            Build Your Setup
+          </a>
+          <a href="contact.html" class="font-sketch text-2xl hover:text-white transition-colors underline decoration-wavy decoration-white">
+            Let's chat
+          </a>
+        </div>
+
+        <!-- Anti-AI Badge -->
+        <div class="mt-16 flex justify-center">
+          <div class="bg-paper sketch-border px-8 py-4 rotate-1 flex items-center gap-4 hover:rotate-0 transition-transform">
+            <i data-lucide="ban" class="text-red-500" style="width:40px;height:40px;stroke-width:2.5;"></i>
+            <div class="text-left">
+              <p class="font-black text-lg leading-none">100% HUMAN-POWERED</p>
+              <p class="font-sketch text-xl text-primary leading-none mt-1">Strictly No AI. Ever.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- How we help -->
+    <section class="py-24 px-6 relative overflow-hidden" id="how">
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="mb-20">
+          <h2 class="font-headline text-4xl md:text-6xl font-black mb-4">We know the <span class="marker-highlight">hustle</span>.</h2>
+          <p class="font-sketch text-2xl max-w-2xl">We know how difficult it is. Building a brand, finding clients, managing them, and above all, making money is a huge undertaking, especially in this oversaturated niche. Driven 100% by our love of money, we'll handle all the marketing and give you the freedom to focus solely on what you love... because let's be frank, no artist likes dealing with clients.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <!-- Card 1 -->
+          <div class="bg-white p-10 sketch-border hover:scale-[1.02] transition-transform" style="transform:rotate(-1deg);" onmouseover="this.style.transform='rotate(-1deg) scale(1.02)'" onmouseout="this.style.transform='rotate(-1deg)'">
+            <div class="w-16 h-16 bg-primary/20 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] flex items-center justify-center mb-8 border-2 border-on-surface">
+              <i data-lucide="brush" style="width:28px;height:28px;"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-4 font-headline">Fursuit creators and artist</h3>
+            <p class="text-on-surface/80 leading-relaxed mb-6">Buried in foam and DMs? We'll handle your queue, filter out the window-shoppers, and manage your inbox so you only talk to clients with cash in hand.</p>
+            <a href="#mix-your-own" class="font-sketch text-2xl text-secondary flex items-center gap-2 hover:underline">
+              Manage clients <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-paper p-10 sketch-border hover:scale-[1.02] transition-transform" style="transform:rotate(1deg);" onmouseover="this.style.transform='rotate(1deg) scale(1.02)'" onmouseout="this.style.transform='rotate(1deg)'">
+            <div class="w-16 h-16 bg-secondary/20 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] flex items-center justify-center mb-8 border-2 border-on-surface">
+              <i data-lucide="users" style="width:28px;height:28px;"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-4 font-headline">Furry Content Creators</h3>
+            <p class="text-on-surface/80 leading-relaxed mb-6">Trying to beat the algorithm? We'll edit your stream clips, scripts, thumbnails, and even create your Discord server for you.</p>
+            <a href="#mix-your-own" class="font-sketch text-2xl text-primary flex items-center gap-2 hover:underline">
+              Grow your platform <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-10 sketch-border hover:scale-[1.02] transition-transform" style="transform:rotate(-1deg);" onmouseover="this.style.transform='rotate(-1deg) scale(1.02)'" onmouseout="this.style.transform='rotate(-1deg)'">
+            <div class="w-16 h-16 bg-tertiary/20 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] flex items-center justify-center mb-8 border-2 border-on-surface">
+              <i data-lucide="palette" style="width:28px;height:28px;"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-4 font-headline">Furry Indie Brands</h3>
+            <p class="text-on-surface/80 leading-relaxed mb-6">Ready to launch that merch line or Patreon? We help you set up your Patreon and your shop, and we'll promote your products so you can keep creating.</p>
+            <a href="#mix-your-own" class="font-sketch text-2xl text-secondary flex items-center gap-2 hover:underline">
+              Increase your earnings <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Mix Builder Section -->
+    <section class="py-24 px-6 relative" id="mix-your-own">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="font-headline text-4xl md:text-6xl font-black mb-6">Create your setup</h2>
+          <p class="text-xl md:text-2xl text-on-surface/80 max-w-3xl mx-auto leading-relaxed font-medium">
+            Pick exactly what you need to get your business off the ground. We focus heavily on monthly plans, but we also have one-time services.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div class="lg:col-span-2 space-y-6">
+
+            <!-- Consultation Banner -->
+            <div class="bg-white p-6 sketch-border flex flex-col sm:flex-row items-center justify-between gap-6 mb-8" style="transform:rotate(1deg);">
+              <div>
+                <h3 class="font-headline text-2xl font-black mb-2 flex items-center gap-2">
+                  <i data-lucide="message-square" class="text-tertiary" style="width:22px;height:22px;color:#2dd4bf;"></i> Not sure what you need?
+                </h3>
+                <p class="font-medium text-on-surface/80">
+                  Don't worry. Let's talk about your goals and we'll find out what's best for you :3
+                </p>
+              </div>
+              <a href="contact.html" class="sketch-button bg-tertiary text-white px-6 py-3 font-bold whitespace-nowrap shrink-0 hover:rotate-[-2deg]">
+                Get a Custom Recommendation
+              </a>
+            </div>
+
+            <!-- Categories rendered by JS -->
+            <div id="categories-container" class="space-y-6"></div>
+
+            <!-- Ad Budget -->
+            <div class="bg-paper p-8 sketch-border">
+              <h3 class="text-2xl font-black font-headline mb-4">Ad Boost Budget (USD)</h3>
+              <p class="text-on-surface/70 mb-6">Want to run ads on Twitter, Instagram, or furry sites? Enter your monthly ad spend. We charge a flat 20% fee to manage them so you get the most bang for your buck. (If your budget is over $1,000, we can talk about a discount!)</p>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-black text-2xl text-on-surface/50">$</span>
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 500"
+                  id="ad-budget-input"
+                  class="w-full pl-10 pr-4 py-4 text-2xl font-black sketch-border bg-white focus:outline-none focus:ring-4 focus:ring-primary/30"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Panel -->
+          <div class="lg:col-span-1">
+            <div class="bg-white sketch-border p-8 sticky top-32" style="transform:rotate(1deg);">
+              <h3 class="font-sketch text-4xl font-black mb-8 underline decoration-primary">Your Custom Setup</h3>
+
+              <div class="space-y-8 mb-10">
+                <div class="border-b-2 border-on-surface/10 pb-6">
+                  <div class="flex items-center gap-2 mb-2 text-secondary">
+                    <i data-lucide="calendar" style="width:20px;height:20px;color:#06b6d4;"></i>
+                    <span class="font-black text-lg">Estimated Monthly</span>
+                  </div>
+                  <span class="font-sketch text-4xl md:text-5xl text-on-surface block" id="monthly-total">
+                    $0 <span class="text-2xl text-on-surface/50">-</span> $0
+                  </span>
+                </div>
+
+                <div class="border-b-2 border-on-surface/10 pb-6">
+                  <div class="flex items-center gap-2 mb-2 text-tertiary">
+                    <i data-lucide="zap" style="width:20px;height:20px;color:#2dd4bf;"></i>
+                    <span class="font-black text-lg">Estimated One-Time</span>
+                  </div>
+                  <span class="font-sketch text-3xl md:text-4xl text-on-surface block" id="onetime-total">
+                    $0 <span class="text-xl text-on-surface/50">-</span> $0
+                  </span>
+                </div>
+              </div>
+
+              <a href="contact.html" class="w-full py-5 sketch-button bg-primary text-on-surface font-black text-xl flex items-center justify-center gap-3 hover:rotate-[-2deg] transition-transform">
+                Request This Setup <i data-lucide="rocket" style="width:20px;height:20px;"></i>
+              </a>
+              <p class="text-sm font-medium mt-6 italic opacity-60 text-center">These are estimated ranges. We will review your specific needs and give you a fair, exact quote before any commitment. If you need a service not listed here, let us know during our chat and we'll see if we can make it happen!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-32 px-6 text-center overflow-hidden" id="contact">
+      <div class="max-w-4xl mx-auto relative">
+        <div class="absolute inset-0 bg-white/20 rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] -z-10 scale-150 rotate-45 blur-2xl"></div>
+        <div class="absolute inset-0 bg-white/10 rounded-[50%_50%_33%_67%_/_55%_27%_73%_45%] -z-10 scale-125 -rotate-12 blur-2xl"></div>
+        <h2 class="font-headline text-5xl md:text-7xl font-black text-on-surface mb-8">Need <span class="italic text-secondary">something</span> else?</h2>
+        <p class="text-2xl font-sketch max-w-2xl mx-auto mb-12">We want you to succeed; for us to win, you have to win, so let's talk about you!</p>
+        <a href="contact.html" class="inline-block sketch-button bg-on-surface text-white px-16 py-6 rounded-2xl text-2xl font-black hover:rotate-[-2deg] active:scale-95">
+          Get in Touch
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-16 px-6 bg-on-surface text-white rounded-t-[4rem] relative mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-8">
+      <div class="flex items-center gap-4">
+        <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.png" />
+        <span class="text-3xl font-black tracking-tighter">Axolot Media</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-12 font-sketch text-2xl">
+        <a class="hover:text-primary transition-colors flex items-center gap-2" href="discord.html">
+          <i data-lucide="message-square" style="width:24px;height:24px;"></i> Send a DM
+        </a>
+        <a class="hover:text-secondary transition-colors flex items-center gap-2" href="mailto:hi@axolotmedia.com">
+          <i data-lucide="mail" style="width:24px;height:24px;"></i> Gmail
+        </a>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="terms.html">Terms</a>
+        <a class="hover:text-primary transition-colors text-lg font-body" href="privacy.html">Privacy</a>
+      </div>
+      <div class="bg-white/10 px-6 py-2 rounded-full font-sketch text-lg border border-white/20">
+        Hand-made with 💚 <span style="font-size:0.75em;">(for money).</span>
+      </div>
+      <p class="font-medium text-sm text-white/40 mt-4">
+        © 2026 Axolot Media. We are serious, serious businessmen owo
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
