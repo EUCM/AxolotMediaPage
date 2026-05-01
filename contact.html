@@ -114,19 +114,6 @@
           <div class="bg-white p-8 sketch-border" style="transform:rotate(1deg);">
             <h2 class="font-headline text-3xl font-black mb-6">Send a Message</h2>
 
-            <!-- Selected Services Section (Hidden by default) -->
-            <div id="selected-setup-section" class="hidden mb-6 p-6 bg-primary/10 sketch-border border-primary" style="transform:rotate(-1deg);">
-              <h3 class="font-headline text-xl font-black text-primary mb-3 flex items-center gap-2">
-                <i data-lucide="check-circle" style="width:20px;height:20px;"></i> Your Selected Setup
-              </h3>
-              <ul id="setup-services-list" class="list-disc list-inside font-medium text-sm text-on-surface/80 space-y-1 mb-4">
-              </ul>
-              <div class="flex justify-between font-bold text-sm border-t-2 border-primary/20 pt-3">
-                <span>Monthly: <span id="setup-monthly" class="font-sketch text-lg"></span></span>
-                <span>One-time: <span id="setup-onetime" class="font-sketch text-lg"></span></span>
-              </div>
-            </div>
-
             <!-- Success message (hidden by default) -->
             <div id="form-success" class="hidden text-center py-10">
               <div class="text-6xl mb-4">🎉</div>
@@ -159,6 +146,20 @@
                   class="w-full p-3 sketch-border bg-paper focus:outline-none focus:ring-2 focus:ring-primary h-32 resize-none"
                   placeholder="Tell us about your project, your goals, or just say hi!"></textarea>
               </div>
+
+              <!-- Selected Services Section (Hidden by default) -->
+              <div id="selected-setup-section" class="hidden mb-6 p-6 bg-primary/10 sketch-border border-primary" style="transform:rotate(-1deg);">
+                <h3 class="font-headline text-xl font-black text-primary mb-3 flex items-center gap-2">
+                  <i data-lucide="check-circle" style="width:20px;height:20px;"></i> Your Selected Setup
+                </h3>
+                <ul id="setup-services-list" class="list-disc list-inside font-medium text-sm text-on-surface/80 space-y-1 mb-4">
+                </ul>
+                <div class="flex justify-between font-bold text-sm border-t-2 border-primary/20 pt-3">
+                  <span>Monthly: <span id="setup-monthly" class="font-sketch text-lg"></span></span>
+                  <span>One-time: <span id="setup-onetime" class="font-sketch text-lg"></span></span>
+                </div>
+              </div>
+
               <button type="submit" id="submit-btn"
                 class="sketch-button bg-secondary text-white w-full py-4 text-xl font-black flex items-center justify-center gap-2 hover:rotate-[-2deg] transition-all">
                 <i data-lucide="send" style="width:20px;height:20px;"></i>
