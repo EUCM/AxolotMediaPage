@@ -79,7 +79,7 @@ function updateTotals() {
       }
     });
   });
-  const totalAdSpend = adBudget + adBudget * 0.2;
+  const totalAdSpend = adBudget;
   monthlyMin += totalAdSpend; monthlyMax += totalAdSpend;
 
   document.getElementById('monthly-total').innerHTML =
