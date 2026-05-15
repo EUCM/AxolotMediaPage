@@ -29,13 +29,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="logo1.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <title>Contact | Axolot Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;700&family=Gochi+Hand&display=swap"
     rel="stylesheet" />
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <style type="text/tailwindcss">
     @theme {
       --font-headline: "Plus Jakarta Sans", sans-serif;
@@ -97,6 +99,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <body class="min-h-screen flex flex-col">
 
+  <!-- Promo Banner -->
+  <div class="fixed top-0 left-0 w-full bg-on-surface text-white font-bold text-center py-2 px-4 z-[60] text-sm md:text-base border-b-2 border-primary">
+    🎉 <span class="text-primary">STARTER PROMO:</span> 25% off your first month, and also second if we don't recover your investment.
+  </div>
   <!-- Magical Background Elements -->
   <div class="magic-decoration w-[500px] h-[500px] bg-white"
     style="top:-10%;left:-10%;animation:floating 8s ease-in-out infinite;"></div>
@@ -106,9 +112,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- Navigation -->
   <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
+    class="fixed top-12 md:top-14 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50 px-6 py-3 flex justify-between items-center bg-white/90 backdrop-blur-md sketch-border">
     <a href="index.html" class="flex items-center gap-3">
-      <img alt="Axolot Logo" class="h-10 w-10 rounded-full" src="logo1.png" />
+      <img alt="Axolot Logo" class="h-10 w-10 rounded-full" src="logo1.webp" />
       <span class="font-headline font-extrabold text-xl tracking-tighter text-secondary">Axolot Media</span>
     </a>
     <div class="hidden md:flex gap-8 items-center font-semibold text-sm">
@@ -210,9 +216,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     },
                     body: formData
                   });
-                  const data = await res.json();
                   
-                  if (data.success || data.success === 'true') {
+                  if (res.ok) {
                     document.getElementById('contact-form').style.display = 'none';
                     document.getElementById('form-success').classList.remove('hidden');
                   } else {
@@ -317,7 +322,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <footer class="w-full py-16 px-6 bg-on-surface text-white rounded-t-[4rem] relative mt-20">
     <div class="max-w-7xl mx-auto flex flex-col items-center gap-8">
       <div class="flex items-center gap-4">
-        <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.png" />
+        <img alt="Logo" class="h-12 w-12 rounded-full grayscale invert" src="logo1.webp" loading="lazy" decoding="async" />
         <span class="text-3xl font-black tracking-tighter">Axolot Media</span>
       </div>
       <div class="flex flex-wrap justify-center gap-12 font-sketch text-2xl">
