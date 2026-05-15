@@ -199,6 +199,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </form>
 
             <script>
+              const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgt-XKL-JPyx3GRBZD3K_fu86ibmuuwWcLWL2JLbPIV2JJ1O9JsHRpcZpPTBexKrDzGw/exec';
+
               document.getElementById('contact-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const btn = document.getElementById('submit-btn');
@@ -206,24 +208,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 btn.disabled = true;
                 label.textContent = 'Sending...';
                 
+                // Build URL-encoded body (Google Apps Script requires this format)
                 const formData = new FormData(this);
+                const params = new URLSearchParams();
+                for (const [key, value] of formData.entries()) {
+                  params.append(key, value);
+                }
                 
                 try {
-                  const res = await fetch('https://formsubmit.co/ajax/hi@axolotmedia.com', {
+                  // no-cors is required for Google Apps Script from a browser.
+                  // The response will be "opaque" (unreadable) but the data DOES
+                  // reach the server if no exception is thrown.
+                  await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    headers: { 
-                      'Accept': 'application/json'
-                    },
-                    body: formData
+                    mode: 'no-cors',
+                    body: params
                   });
                   
-                  if (res.ok) {
-                    document.getElementById('contact-form').style.display = 'none';
-                    document.getElementById('form-success').classList.remove('hidden');
-                  } else {
-                    label.textContent = 'Error — try again';
-                    btn.disabled = false;
-                  }
+                  // If we get here without an error, the request was sent successfully
+                  document.getElementById('contact-form').style.display = 'none';
+                  document.getElementById('form-success').classList.remove('hidden');
                 } catch(err) {
                   label.textContent = 'Error — try again';
                   btn.disabled = false;
